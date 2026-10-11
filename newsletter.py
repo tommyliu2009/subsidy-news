@@ -4,7 +4,7 @@
 import json, sys, html, datetime as dt
 D = int(sys.argv[1]) if len(sys.argv) > 1 else 7
 db = json.load(open('news_db.json')); cut = (dt.date.today() - dt.timedelta(days=D)).isoformat()
-U = 'https://tommyliu2009.github.io/subsidy-news/'
+U = 'https://news.subsidyking.tw/'
 out = [f'<html><body style="font-family:sans-serif;max-width:680px;margin:auto"><h1>台灣政府補助新聞網｜每週電子報 {dt.date.today()}</h1>']
 for c in ['補助政策', '補助成果發表', '補助資訊']:
     a = sorted([v for v in db.values() if v.get('summary_ok') and v['category'] == c and v['date'] >= cut], key=lambda v: v['date'], reverse=True)

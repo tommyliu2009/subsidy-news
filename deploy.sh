@@ -7,9 +7,9 @@ cd "$(dirname "$0")"
 exec 9>/tmp/subsidy-news.lock
 flock -n 9 || { echo "上一次更新還在執行，略過本次"; exit 0; }
 export PATH="$HOME/.local/bin:$PATH"
-if [ "${1:-}" != "publish" ]; then timeout 1500 python3 fetch_news.py "${1:-3}" || echo "抓取逾時或失敗，沿用既有資料"; fi
+if [ "${1:-}" != "publish" ]; then timeout 2400 python3 fetch_news.py "${1:-3}" || echo "抓取逾時或失敗，沿用既有資料"; fi
 python3 build_site.py
-# 網域 news.subsidyking.tw 的 DNS 生效後：echo news.subsidyking.tw > CNAME 並設定 Pages cname
+[ -f CNAME ] || echo news.subsidyking.tw > CNAME
 git add -A
 if git diff --cached --quiet; then echo "資料無變動，不需部署"; exit 0; fi
 git -c user.name="tommyliu2009" -c user.email="tommyliu2009@users.noreply.github.com" commit -qm "新聞更新 $(TZ=Asia/Taipei date '+%Y-%m-%d %H:%M')"

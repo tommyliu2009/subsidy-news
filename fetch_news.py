@@ -134,15 +134,19 @@ def main():
             status[f'Google新聞：{q}'] = {'ok': False, 'note': str(ex)[:100]}
         time.sleep(1)
     known = {tkey(v['title']) for v in db.values()} | {tkey(v.get('title_zh', '')) for v in db.values() if v.get('title_zh')} | {tkey(t) for t in rejected}
+    try: gseen = set(json.load(open('seen_glinks.json')))
+    except Exception: gseen = set()
     seen = set(); todo = []
     for c in cand:
         if NOISE.search(c['title']): continue
         k = tkey(c['title'])
-        if not k or k in seen or k in known or c.get('url') in db: continue
+        if not k or k in seen or k in known or c.get('url') in db or c.get('glink') in gseen: continue
         seen.add(k); todo.append(c)
     # 各分類平均取，避免單一分類塞滿
     by = {}
     for c in todo: by.setdefault(c['cat'] or '_', []).append(c)
+    import random
+    for v in by.values(): random.shuffle(v)
     todo = []
     while len(todo) < MAX_NEW * 2 and any(by.values()):
         for k in list(by):
@@ -152,6 +156,7 @@ def main():
             try:
                 d = gnewsdecoder(c['glink'], interval=1); c['url'] = d.get('decoded_url') if d.get('success') else None
             except Exception: c['url'] = None
+    gseen |= {c['glink'] for c in todo if c.get('glink')}; json.dump(sorted(gseen), open('seen_glinks.json', 'w'))
     todo = [c for c in todo if c['url'] and c['url'] not in rej_urls and c['url'] not in db and unit_of(c['url']) in UNIT.values()]
     for c in todo:
         if not is_news(c['title'], c['url']): rejected.add(c['title'])
