@@ -59,3 +59,5 @@ footer{background:#111;color:#bbb;padding:24px 0;font-size:14px}footer b{color:#
 #subf .chk{display:flex;gap:12px;flex-wrap:wrap}#subf button{padding:10px 24px;font-size:16px;background:#1f3a5f;color:#fff;border:0;cursor:pointer}
 .priv{font-size:13px;color:#555;margin-top:12px}.smsg{color:#2e7d32;font-weight:600}
 @media(max-width:700px){.skbig{font-size:14px;padding:8px 10px}}
+#tabs{align-items:center}.navsk,.navsub{white-space:nowrap;line-height:1.2;flex:0 0 auto;align-self:center}
+@media(max-width:700px){.navsk,.navsub{padding:5px 10px;font-size:14px}.brand small{letter-spacing:1px}}

@@ -17,7 +17,7 @@ function side(){const t={};N.forEach(n=>{(t[n.category]=t[n.category]||{})[n.top
 function home(){const [l,...r]=N;if(!l)return;$('#lead').innerHTML=`<article class="lead">${meta(l)}<h2>${link(l,ttl(l))}</h2>${orig(l)}<p class="sum">${esc(l.summary)}</p><button class="tog">展開摘要 ▾</button><a class="src" href="${esc(l.url)}" target="_blank" rel="noopener">閱讀原文 ↗</a></article>`;
  const used=new Set([l]);const picks=CATS.map(c=>r.find(n=>n.category==c&&!used.has(n))).filter(Boolean);
  $('#subs').innerHTML='<h4 class="kicker">焦點新聞</h4>'+picks.map(n=>`<article class="subh">${meta(n)}<h3>${link(n,ttl(n))}</h3></article>`).join('');
- $$('.block').forEach(b=>{const a=N.filter(n=>n.category==b.dataset.cat&&n!==l).slice(0,6);b.hidden=!a.length;b.querySelector('.grid').innerHTML=a.map(n=>card(n)).join('')})}
+ $$('.block[data-cat]').forEach(b=>{const a=N.filter(n=>n.category==b.dataset.cat&&n!==l).slice(0,6);b.hidden=!a.length;b.querySelector('.grid').innerHTML=a.map(n=>card(n)).join('')})}
 function catv(){const all=N.filter(n=>n.category==cat),a=all.filter(n=>!topic||n.topic==topic),tp={};all.forEach(n=>tp[n.topic||'綜合']=(tp[n.topic||'綜合']||0)+1);
  $('#ctitle').textContent=L[cat]+(topic?'｜'+topic:'');$('#cmeta').textContent=`共 ${a.length} 則`;
  $('#topics').innerHTML=`<a data-c="${cat}" data-t="" class="${topic?'':'on'}">全部</a>`+Object.entries(tp).sort((x,y)=>y[1]-x[1]).map(([u,k])=>`<a data-c="${cat}" data-t="${esc(u)}" class="${u==topic?'on':''}">${esc(u)} ${k}</a>`).join('');
