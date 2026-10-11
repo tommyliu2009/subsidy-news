@@ -3,7 +3,7 @@ from playwright.async_api import async_playwright
 U=sys.argv[1] if len(sys.argv)>1 else 'https://tommyliu2009.github.io/subsidy-news/'
 async def main():
   async with async_playwright() as p:
-    b=await p.chromium.launch(executable_path='/usr/bin/google-chrome');pg=await b.new_page(viewport={'width':1366,'height':900})
+    b=await p.chromium.launch(executable_path='/usr/bin/google-chrome',args=['--host-resolver-rules=MAP news.subsidyking.tw 185.199.108.153']);pg=await b.new_page(viewport={'width':1366,'height':900})
     errs=[];pg.on('pageerror',lambda e:errs.append(str(e)))
     await pg.goto(U+'?t='+str(int(time.time())),wait_until='networkidle')
     print('title',await pg.title());print('cards',await pg.locator('.card').count(),'side ad',await pg.locator('.side .ad').first.is_visible(),'open',await pg.locator('.olist li').count())

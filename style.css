@@ -61,3 +61,4 @@ footer{background:#111;color:#bbb;padding:24px 0;font-size:14px}footer b{color:#
 @media(max-width:700px){.skbig{font-size:14px;padding:8px 10px}}
 #tabs{align-items:center}.navsk,.navsub{white-space:nowrap;line-height:1.2;flex:0 0 auto;align-self:center}
 @media(max-width:700px){.navsk,.navsub{padding:5px 10px;font-size:14px}.brand small{letter-spacing:1px}}
+.mad b{font-size:18px}.side .ad .ad-name{font-size:22px}
