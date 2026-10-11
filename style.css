@@ -66,3 +66,4 @@ footer{background:#111;color:#bbb;padding:24px 0;font-size:14px}footer b{color:#
 .hdad b{color:#d2691e;font-size:16px}.hdad a{color:#1f4e8c}
 .side .ad{position:sticky;top:64px;z-index:2}
 @media(max-width:900px){.hdad{display:none}}
+.hdad{grid-template-columns:auto;row-gap:0;padding:6px 16px;text-align:center;line-height:1.35}
