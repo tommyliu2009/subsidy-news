@@ -1,0 +1,11 @@
+__pycache__/
+*.log
+shot*.png
+news_db.json
+pending_summary.json
+rejected.json
+rejected_urls.json
+source_status.json
+newsletter_*.html
+s*.json
+db_run1.bak
