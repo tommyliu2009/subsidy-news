@@ -62,3 +62,7 @@ footer{background:#111;color:#bbb;padding:24px 0;font-size:14px}footer b{color:#
 #tabs{align-items:center}.navsk,.navsub{white-space:nowrap;line-height:1.2;flex:0 0 auto;align-self:center}
 @media(max-width:700px){.navsk,.navsub{padding:5px 10px;font-size:14px}.brand small{letter-spacing:1px}}
 .mad b{font-size:18px}.side .ad .ad-name{font-size:22px}
+.hdad{margin-left:auto;margin-right:14px;display:grid;grid-template-columns:auto auto;column-gap:14px;row-gap:2px;align-items:center;background:#fff7ee;border:2px solid #f08a24;border-radius:8px;padding:8px 14px;font-size:14px;line-height:1.4}
+.hdad b{color:#d2691e;font-size:16px}.hdad a{color:#1f4e8c}
+.side .ad{position:sticky;top:64px;z-index:2}
+@media(max-width:900px){.hdad{display:none}}
