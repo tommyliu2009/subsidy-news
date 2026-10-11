@@ -10,16 +10,9 @@ async def main():
     print('補助王 links',await pg.locator('a[href="https://www.subsidyking.tw/"]').count())
     for c in ['補助政策','補助成果發表','補助資訊']:
       await pg.click(f'#tabs button[data-c="{c}"]');print(c,await pg.inner_text('#cmeta'))
-    await pg.click('#tabs button[data-c="首頁"]')
-    # 訂閱表單測試（攔截 mailto，不實際寄信）
-    await pg.evaluate("window._u=null;Object.defineProperty(window,'location',{value:{...location,set href(v){window._u=v}}})") if False else None
-    reqs=[];pg.on('framenavigated',lambda f:reqs.append(f.url))
-    await pg.fill('#semail','test-delete-me@example.com');await pg.uncheck('#subf input[value="補助成果發表"]')
-    await pg.route('mailto:*',lambda r:r.abort())
-    await pg.click('#subf button');await pg.wait_for_timeout(800)
-    print('subscribe msg visible',await pg.locator('#smsg').is_visible(),(await pg.inner_text('#smsg'))[:40])
-    await pg.screenshot(path='shot.png')
-    m=await b.new_page(viewport={'width':390,'height':844},is_mobile=True,device_scale_factor=2);await m.goto(U,wait_until='networkidle')
+    await pg.click('#tabs button[data-c="首頁"]');await pg.wait_for_timeout(300);await pg.screenshot(path='shot.png')
+    print('subscribe:',await pg.inner_text('#subscribe p'),'|',await pg.inner_text('#sbtn'),'|',await pg.inner_text('#smsg'))
+    m=await b.new_page(viewport={'width':390,'height':844},is_mobile=True,device_scale_factor=2);await m.goto(U+'?t='+str(int(time.time())),wait_until='networkidle')
     print('mobile ad visible',await m.locator('.mad').is_visible());await m.screenshot(path='shot_mobile.png')
     print('errors',errs);await b.close()
 asyncio.run(main())

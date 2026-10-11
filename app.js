@@ -34,8 +34,16 @@ const h0=decodeURIComponent(location.hash.slice(1));go(CATS.includes(h0)?h0:'首
 function openblk(){const o=window.OPEN||[],b=$('#openblk');if(!o.length){b.hidden=true;return}
  b.querySelector('.olist').innerHTML='<ul>'+o.slice(0,15).map(x=>`<li>${x.soon?'<span class="soon">即將截止</span>':'<span class="opn">開放中</span>'}<a href="${esc(x.url)}" target="_blank" rel="noopener">${esc(x.name)}</a><em>${esc(x.org)}${x.end?'｜截止 '+x.end:''}</em></li>`).join('')+`</ul><p class="sk">共 ${o.length} 項，完整清單請到 <a href="https://www.subsidyking.tw/" target="_blank" rel="noopener">補助王 ↗</a></p>`}
 openblk();
-$('#subf').onsubmit=e=>{e.preventDefault();const m=$('#semail').value.trim(),c=$$('#subf input[type=checkbox]:checked').map(x=>x.value);
- if(!c.length){alert('請至少勾選一類');return}
- const body=`我要訂閱台灣政府補助新聞網電子報\n電子郵件：${m}\n訂閱類別：${c.join('、')}\n`;
- location.href='mailto:tommyliu2009@gmail.com?subject='+encodeURIComponent('訂閱台灣政府補助新聞網 '+m)+'&body='+encodeURIComponent(body);
- const s=$('#smsg');s.hidden=false;s.textContent='已開啟您的郵件程式，請按「傳送」寄出訂閱信即完成訂閱。若沒有自動開啟，請直接寄信到 tommyliu2009@gmail.com，主旨寫「訂閱台灣政府補助新聞網」。'};
+(function(){const f=$('#subf'),s=$('#smsg'),b=$('#sbtn'),U=(window.SUB_URL||'').trim();
+ const show=(t,ok)=>{s.hidden=false;s.textContent=t;s.style.color=ok?'#2e7d32':'#c8102e'};
+ if(!U){$('#semail').disabled=true;b.disabled=true;b.textContent='即將開放';show('訂閱功能即將開放，敬請期待。如需先訂閱，請寄信至 tommyliu2009@gmail.com。',true);return}
+ f.onsubmit=e=>{e.preventDefault();const m=$('#semail').value.trim().toLowerCase();if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(m)){show('Email 格式不正確，請重新輸入。');return}
+  b.disabled=true;show('處理中…',true);const cb='subcb'+Date.now(),sc=document.createElement('script');
+  const done=()=>{b.disabled=false;sc.remove();delete window[cb];clearTimeout(t)},t=setTimeout(()=>{done();show('連線逾時，請稍後再試。')},15000);
+  window[cb]=r=>{done();const st=r&&r.status;
+   if(st=='subscribed')show('已訂閱！之後會把補助新聞寄到 '+m+'。',true);
+   else if(st=='unsubscribed')show('已取消訂閱，不會再寄信給 '+m+'。',true);
+   else if(st=='wait')show('剛剛已處理過這個 Email，請 30 秒後再試。');
+   else show('Email 格式不正確，請重新輸入。')};
+  sc.onerror=()=>{done();show('連線失敗，請稍後再試。')};
+  sc.src=U+(U.includes('?')?'&':'?')+'email='+encodeURIComponent(m)+'&callback='+cb;document.body.appendChild(sc)}})();
