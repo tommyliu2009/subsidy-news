@@ -3,6 +3,7 @@
 程式只放暫時摘要（summary_ok=False，不上線）；每則須依原文寫 50～200 字繁中摘要後以 apply_summaries.py 寫回。
 用法: python3 fetch_news.py [天數，預設3]"""
 import sys, json, re, time, html, datetime as dt, urllib.parse, concurrent.futures as cf, ssl
+import sys as _s; _s.path.insert(0, '/workspace/shared-data'); import news_filter  # 共用過濾：重複比對用正規化標題
 import feedparser, requests, trafilatura
 from requests.adapters import HTTPAdapter
 class _SSLAdapter(HTTPAdapter):
@@ -134,13 +135,14 @@ def main():
             status[f'Google新聞：{q}'] = {'ok': False, 'note': str(ex)[:100]}
         time.sleep(1)
     known = {tkey(v['title']) for v in db.values()} | {tkey(v.get('title_zh', '')) for v in db.values() if v.get('title_zh')} | {tkey(t) for t in rejected}
+    known_norm = news_filter.known_keys(db.values()) | {news_filter.norm_title(x) for x in rejected}
     try: gseen = set(json.load(open('seen_glinks.json')))
     except Exception: gseen = set()
     seen = set(); todo = []
     for c in cand:
         if NOISE.search(c['title']): continue
         k = tkey(c['title'])
-        if not k or k in seen or k in known or c.get('url') in db or c.get('glink') in gseen: continue
+        if not k or k in seen or k in known or news_filter.norm_title(c['title']) in known_norm or c.get('url') in db or c.get('glink') in gseen: continue
         seen.add(k); todo.append(c)
     # 各分類平均取，避免單一分類塞滿
     by = {}
