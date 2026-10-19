@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """產生每週電子報 HTML（newsletter_YYYYMMDD.html），只產生檔案、不寄信。
-用法: python3 newsletter.py [天數，預設7]。寄送前須由劉靜渡確認名單與內容。"""
+用法: python3 newsletter.py [天數，預設7]。寄送前須經使用者確認名單與內容。"""
 import json, sys, html, datetime as dt
 D = int(sys.argv[1]) if len(sys.argv) > 1 else 7
 db = json.load(open('news_db.json')); cut = (dt.date.today() - dt.timedelta(days=D)).isoformat()
@@ -11,5 +11,5 @@ for c in ['補助政策', '補助成果發表', '補助資訊']:
     if not a: continue
     out.append(f'<h2>{c}</h2>')
     for v in a: out.append(f'<p><a href="{html.escape(v["url"])}"><b>{html.escape(v["title"])}</b></a><br><small>{v["unit"]}｜{v["date"]}</small><br>{html.escape(v["summary"])}</p>')
-out.append(f'<p>查詢全台補助：<a href="https://www.subsidyking.tw/">補助王</a>｜網站：<a href="{U}">{U}</a></p><p>補助、標案、商業模式顧問｜仁禾管理顧問 renhe74123@gmail.com</p><p style="color:#777;font-size:12px">取消訂閱：回信主旨寫「取消訂閱台灣政府補助新聞網」。</p></body></html>')
+out.append(f'<p>查詢全台補助：<a href="https://www.subsidyking.tw/">補助王</a>｜網站：<a href="{U}">{U}</a></p><p>仁禾管理顧問<br><a href="mailto:renhe74123@gmail.com">renhe74123@gmail.com</a><br><a href="https://line.me/R/ti/p/@891tcxhu">LINE 官方帳號：@891tcxhu</a></p><p style="color:#777;font-size:12px">取消訂閱：回信主旨寫「取消訂閱台灣政府補助新聞網」。</p></body></html>')
 f = f'newsletter_{dt.date.today():%Y%m%d}.html'; open(f, 'w').write('\n'.join(out)); print('已產生', f)
