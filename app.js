@@ -10,7 +10,7 @@ const also=n=>n.also&&n.also.length?`<span class="also">另見：${n.also.map(a=
 const meta=n=>`<div class="meta">${tag(n)}<span class="unit">${esc(n.unit)}</span><time>${n.date}</time></div>`;
 const card=(n,cls='card')=>`<article class="${cls}">${meta(n)}<h3>${link(n,ttl(n))}</h3>${orig(n)}<p class="sum">${esc(n.summary)}</p><button class="tog">展開摘要 ▾</button><div class="foot"><a class="src" href="${esc(su(n.url))}" target="_blank" rel="noopener">原始連結 ↗</a>${also(n)}</div></article>`;
 $('#tabs').innerHTML=TABS.map(c=>`<button data-c="${c}">${c=='首頁'?'首頁':L[c]}</button>`).join('')+'<a class="navsk" href="https://www.subsidyking.tw/" target="_blank" rel="noopener">補助王 ↗</a><a class="navsub" href="#subscribe">✉ 訂閱</a>';
-const AD=`<div class="box ad"><div class="ad-name">仁禾管理顧問<br>劉靜渡</div><div class="ad-contact"><a href="mailto:tommyliu2009@gmail.com">tommyliu2009@gmail.com</a><br><a href="https://line.me/R/ti/p/@891tcxhu" target="_blank" rel="noopener">LINE 官方帳號：@891tcxhu</a></div></div>`;
+const AD=`<div class="box ad"><div class="ad-name">仁禾管理顧問</div><div class="ad-contact"><a href="mailto:renhe74123@gmail.com">renhe74123@gmail.com</a><br><a href="https://line.me/R/ti/p/@891tcxhu" target="_blank" rel="noopener">LINE 官方帳號：@891tcxhu</a></div></div>`;
 function side(){const t={};N.forEach(n=>{(t[n.category]=t[n.category]||{})[n.topic||'綜合']=((t[n.category]||{})[n.topic||'綜合']||0)+1});
  let h=AD+'<div class="box"><h4>分類</h4>'+CATS.filter(c=>t[c]).map(c=>`<p class="grp"><a data-c="${c}" data-t="">${L[c]}</a></p><ul class="units">`+Object.entries(t[c]).sort((a,b)=>b[1]-a[1]).map(([u,k])=>`<li><a data-c="${c}" data-t="${esc(u)}" class="${c==cat&&u==topic?'on':''}">${esc(u)}<em>${k}</em></a></li>`).join('')+'</ul>').join('')+'</div>';
  h+='<a class="box skside" href="https://www.subsidyking.tw/" target="_blank" rel="noopener"><b>補助王</b><span>全台政府補助查詢，開放中、即將截止一次看 ↗</span></a><a class="box subside" href="#subscribe">✉ 免費訂閱補助新聞電子報</a>';h+='<div class="box"><h4>最新新聞</h4><ol class="latest">'+N.slice(0,8).map(n=>`<li>${link(n,ttl(n))}<time>${n.date}｜${esc(n.unit)}</time></li>`).join('')+'</ol></div>';
@@ -37,7 +37,7 @@ function openblk(){const o=window.OPEN||[],b=$('#openblk');if(!o.length){b.hidde
 openblk();
 (function(){const f=$('#subf'),s=$('#smsg'),b=$('#sbtn'),U=(window.SUB_URL||'').trim();
  const show=(t,ok)=>{s.hidden=false;s.textContent=t;s.style.color=ok?'#2e7d32':'#c8102e'};
- if(!U){$('#semail').disabled=true;b.disabled=true;b.textContent='即將開放';show('訂閱功能即將開放，敬請期待。如需先訂閱，請寄信至 tommyliu2009@gmail.com。',true);return}
+ if(!U){$('#semail').disabled=true;b.disabled=true;b.textContent='即將開放';show('訂閱功能即將開放，敬請期待。如需先訂閱，請寄信至 renhe74123@gmail.com。',true);return}
  f.onsubmit=e=>{e.preventDefault();const m=$('#semail').value.trim().toLowerCase();if(!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(m)){show('Email 格式不正確，請重新輸入。');return}
   b.disabled=true;show('處理中…',true);const cb='subcb'+Date.now(),sc=document.createElement('script');
   const done=()=>{b.disabled=false;sc.remove();delete window[cb];clearTimeout(t)},t=setTimeout(()=>{done();show('連線逾時，請稍後再試。')},15000);

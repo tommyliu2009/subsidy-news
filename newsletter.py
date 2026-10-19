@@ -11,5 +11,5 @@ for c in ['補助政策', '補助成果發表', '補助資訊']:
     if not a: continue
     out.append(f'<h2>{c}</h2>')
     for v in a: out.append(f'<p><a href="{html.escape(v["url"])}"><b>{html.escape(v["title"])}</b></a><br><small>{v["unit"]}｜{v["date"]}</small><br>{html.escape(v["summary"])}</p>')
-out.append(f'<p>查詢全台補助：<a href="https://www.subsidyking.tw/">補助王</a>｜網站：<a href="{U}">{U}</a></p><p>補助、標案、商業模式顧問｜仁禾管理顧問 劉靜渡 tommyliu2009@gmail.com</p><p style="color:#777;font-size:12px">取消訂閱：回信主旨寫「取消訂閱台灣政府補助新聞網」。</p></body></html>')
+out.append(f'<p>查詢全台補助：<a href="https://www.subsidyking.tw/">補助王</a>｜網站：<a href="{U}">{U}</a></p><p>補助、標案、商業模式顧問｜仁禾管理顧問 renhe74123@gmail.com</p><p style="color:#777;font-size:12px">取消訂閱：回信主旨寫「取消訂閱台灣政府補助新聞網」。</p></body></html>')
 f = f'newsletter_{dt.date.today():%Y%m%d}.html'; open(f, 'w').write('\n'.join(out)); print('已產生', f)
