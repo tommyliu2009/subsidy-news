@@ -4,7 +4,7 @@
 
 - 網址：https://news.subsidyking.tw/
 - 主題：最新政府補助新聞與公告
-- 更新：2026-11-12（每日自動更新）
+- 更新：2026-11-13（每日自動更新）
 - 資料來源：各機關官方網站與媒體原文，每則附原始出處連結
 - 維護：仁禾管理顧問
 
@@ -36,6 +36,7 @@
 - 2026-11-05 A+通過現觀、藥華醫藥、鈺祥等3項計畫， 聚焦自主智慧電信、創新抗癌新藥及半導體關鍵濾材技術：https://service.moea.gov.tw/EE514/tw/aiip/50-8284.html
 
 ## 相關網站
+- 補助王：https://www.subsidyking.tw/
 - 獎補助資訊網：https://www.grantking.tw/
 - 經濟部新聞網：https://web8.subsidyking.tw/
 - 研發補助王：https://web20.subsidyking.tw/
