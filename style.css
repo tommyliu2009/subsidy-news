@@ -4,7 +4,7 @@
 .topbar{background:#111;color:#ccc;font-size:13px}.topbar .wrap{display:flex;justify-content:space-between;padding:6px 20px}
 .masthead{background:#fff;border-bottom:1px solid var(--line)}.masthead .wrap{padding:22px 20px}
 .brand{display:flex;align-items:center;gap:14px}.mark{background:var(--red);color:#fff;font:700 30px/1 var(--serif);width:54px;height:54px;display:grid;place-items:center;border-radius:4px}
-.brand b{display:block;font:900 30px/1.2 var(--serif);letter-spacing:1px}.brand small{color:var(--mute);letter-spacing:3px;font-size:12px}
+.brand b,.brand .brand-h1{display:block;margin:0;font:900 30px/1.2 var(--serif);letter-spacing:1px}.brand small{color:var(--mute);letter-spacing:3px;font-size:12px}
 .catnav{background:#fff;border-bottom:3px solid var(--ink);position:sticky;top:0;z-index:5}.catnav .wrap{display:flex;overflow-x:auto}
 .catnav button{background:none;border:0;font:600 16px var(--sans);padding:12px 18px;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;margin-bottom:-3px}
 .catnav button.on,.catnav button:hover{color:var(--red);border-color:var(--red)}
@@ -32,7 +32,7 @@ main{padding-top:24px}
 .note{font-size:13px;color:var(--mute);border-top:1px solid var(--line);padding:16px 0}
 footer{background:#111;color:#bbb;padding:24px 0;font-size:14px}footer b{color:#fff;font-family:var(--serif)}footer p{margin:4px 0}
 @media(max-width:900px){.hero,.cols{grid-template-columns:1fr}}
-@media(max-width:640px){.wrap{padding:0 14px}.brand b{font-size:21px}.mark{width:42px;height:42px;font-size:24px}.masthead .wrap{padding:14px}
+@media(max-width:640px){.wrap{padding:0 14px}.brand b,.brand .brand-h1{font-size:21px}.mark{width:42px;height:42px;font-size:24px}.masthead .wrap{padding:14px}
 .grid{grid-template-columns:1fr}.lead{padding:18px}.lead h2{font-size:23px}.lead .sum{font-size:16px}
 .sum{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.sum.open{display:block}.tog{display:block}.topbar #upd{display:none}}
 .tog[hidden]{display:none!important}
